@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-yhU3oZ8Tpk8W0XczzrPf4K52cMbmAOkJ8OYzK9bOBX+FcU8W5Qv5nX9QJ9v5g5u" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div class="section-p1 login-container">
+    <h2><i class="fas fa-user-plus"></i> Đăng Ký</h2>
+    <form th:action="@{/register}" th:object="${user}" method="post" class="form">
+        <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password"><i class="fas fa-lock"></i> Mật khẩu:</label>
+            <input type="password" id="password" th:field="*{password}" required>
+        </div>
+        <button type="submit" class="normal"><i class="fas fa-arrow-right"></i> Đăng Ký</button>
+    </form>
+    <p th:style="'color: ' + ${messageColor}" th:text="${message}"></p>
+    <p>Đã có tài khoản? <a th:href="@{/login}">Đăng nhập ngay</a></p>
+</div>
+</body>
+</html>
