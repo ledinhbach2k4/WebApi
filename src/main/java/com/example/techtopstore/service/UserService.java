@@ -1,7 +1,7 @@
 package com.example.techtopstore.service;
 
-import com.example.techtopstore.dao.UserDAO;
 import com.example.techtopstore.model.User;
+import com.example.techtopstore.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,47 +11,47 @@ import java.util.List;
 public class UserService {
 
     @Autowired
-    private UserDAO userDAO;
+    private UserRepository userRepository;
 
     public List<User> getAllUsers() {
-        return userDAO.getAllUsers();
+        return userRepository.findAll();
     }
 
     public User getUserById(int id) {
-        return userDAO.getUserById(id);
+        return userRepository.getReferenceById(id);
     }
 
     public User getUserByEmail(String email) {
-        return userDAO.findByEmail(email);
+        return userRepository.findByEmail(email);
     }
 
     public User addUser(User user) {
-        if (userDAO.findByEmail(user.getEmail()) != null) {
+        if (userRepository.findByEmail(user.getEmail()) != null) {
             throw new RuntimeException("Email đã tồn tại!");
         }
-        userDAO.addUser(user);
+        userRepository.save(user);
         return user;
     }
 
     public User updateUser(int id, User user) {
-        User existingUser = userDAO.getUserById(id);
+        User existingUser = userRepository.getReferenceById(id);
         if (existingUser != null) {
             user.setId(id);
-            User userWithEmail = userDAO.findByEmail(user.getEmail());
+            User userWithEmail = userRepository.findByEmail(user.getEmail());
             if (userWithEmail != null && userWithEmail.getId() != id) {
                 throw new RuntimeException("Email đã tồn tại!");
             }
-            userDAO.updateUser(user);
+            userRepository.save(user);
             return user;
         }
         return null;
     }
 
     public User patchUser(int id, User userUpdates) {
-        User existingUser = userDAO.getUserById(id);
+        User existingUser = userRepository.getReferenceById(id);
         if (existingUser != null) {
             if (userUpdates.getEmail() != null) {
-                User userWithEmail = userDAO.findByEmail(userUpdates.getEmail());
+                User userWithEmail = userRepository.findByEmail(userUpdates.getEmail());
                 if (userWithEmail != null && userWithEmail.getId() != id) {
                     throw new RuntimeException("Email đã tồn tại!");
                 }
@@ -63,13 +63,13 @@ public class UserService {
             if (userUpdates.getRole() != null) {
                 existingUser.setRole(userUpdates.getRole());
             }
-            userDAO.updateUser(existingUser);
+            userRepository.save(existingUser);
             return existingUser;
         }
         return null;
     }
 
     public void deleteUser(int id) {
-        userDAO.deleteUser(id);
+        userRepository.deleteById(id);
     }
 }

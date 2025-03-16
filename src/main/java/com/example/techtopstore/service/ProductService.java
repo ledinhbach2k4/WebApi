@@ -1,7 +1,7 @@
 package com.example.techtopstore.service;
 
-import com.example.techtopstore.dao.ProductDAO;
 import com.example.techtopstore.model.Product;
+import com.example.techtopstore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,38 +10,38 @@ import java.util.List;
 @Service
 public class ProductService {
     @Autowired
-    private ProductDAO productDAO;
+    private ProductRepository productRepository;
 
     public List<Product> getAllProducts(){
-        return productDAO.getAllProducts();
+        return productRepository.findAll();
     }
     public List<Product> getProductsByCategory(int categoryId){
-        return productDAO.findByCategoryId(categoryId);
+        return productRepository.findByCategoryId(categoryId);
     }
 
     public Product getProductById(int id){
-        return productDAO.getProductById(id);
+        return productRepository.findById(id);
     }
 
     public Product addProduct(Product product){
-        productDAO.addProduct(product);
+        productRepository.save(product);
         return product;
     }
 
     public Product updateProduct(int id, Product product){
-        Product existingProduct = productDAO.getProductById(id);
+        Product existingProduct = productRepository.getReferenceById(id);
         if (existingProduct != null){
             product.setId(id);
-            productDAO.updateProduct(product);
+            productRepository.save(product);
             return product;
         }
         return null;
     }
 
     public void deleteProduct(int id){
-        Product existingProduct = productDAO.getProductById(id);
+        Product existingProduct = productRepository.getReferenceById(id);
         if (existingProduct != null){
-            productDAO.deleteProduct(id);
+            productRepository.deleteById(id);
         }
     }
 }
