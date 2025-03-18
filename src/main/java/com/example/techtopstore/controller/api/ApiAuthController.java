@@ -2,6 +2,9 @@ package com.example.techtopstore.controller.api;
 
 import com.example.techtopstore.dto.ApiResponse;
 import com.example.techtopstore.dto.RegisterRequest;
+import com.example.techtopstore.model.User;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,10 +20,10 @@ public class ApiAuthController {
     }
 
     @PostMapping("/login")
-    public ApiResponse login(@RequestParam("email") String email,@RequestParam("password") String password){
-        if(email.equals("admin@gmail.com") && password.equals("123456")){
-            return new ApiResponse<>(200, "Login success", null);
+    public ResponseEntity<User> login(@RequestParam("email") String email, @RequestParam("password") String password){
+        if(email.equals("admin@gmail.com") && password.equals("123")){
+            return new ResponseEntity<>(new User(email, password, "Admin"), HttpStatus.OK);
         }
-        return new ApiResponse<>(500, "Login failed", null);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

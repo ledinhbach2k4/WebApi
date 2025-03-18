@@ -15,6 +15,10 @@ public class ProductService {
     public List<Product> getAllProducts(){
         return productRepository.findAll();
     }
+    public List<Product> searchProducts(String keyword){
+        return productRepository.searchProducts(keyword);
+    }
+
     public List<Product> getProductsByCategory(int categoryId){
         return productRepository.findByCategoryId(categoryId);
     }

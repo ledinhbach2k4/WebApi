@@ -17,6 +17,12 @@ public class ApiProductController {
     private ProductService productService;
 
     // GET: Lấy danh sách products
+    @GetMapping("/search")
+    public ResponseEntity<List<Product>> searchProducts(@RequestParam("keyword") String keyword){
+        List<Product> products = productService.searchProducts(keyword);
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();

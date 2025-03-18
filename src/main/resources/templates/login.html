@@ -1,28 +1,46 @@
+<!-- Login Page -->
 <!DOCTYPE html>
-<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng Nhập</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-yhU3oZ8Tpk8W0XczzrPf4K52cMbmAOkJ8OYzK9bOBX+FcU8W5Qv5nX9QJ9v5g5u" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<div class="section-p1 login-container">
-    <h2><i class="fas fa-sign-in-alt"></i> Đăng Nhập</h2>
-    <form th:action="@{/login}" th:object="${user}" method="post" class="form">
-        <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-            <input type="email" id="email" th:field="*{email}" required>
+<section id="header">
+    <a href="#"><img class="logo" src="./img/logo.png" alt=""></a>
+    <div>
+        <ul id="navbar">
+            <li><a href="/">Home</a></li>
+            <li><a href="shop">Products</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="contact">Contact</a></li>
+            <li><a href="login" class="active">Login</a></li>
+        </ul>
+    </div>
+</section>
+<section class="form-container">
+    <div class="form-box">
+        <h2>Đăng Nhập</h2>
+        <div class="form-content">
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="normal">Đăng Nhập</button>
+            </form>
+            <p>Chưa có tài khoản? <a href="register">Đăng ký ngay</a></p>
         </div>
-        <div class="form-group">
-            <label for="password"><i class="fas fa-lock"></i> Mật khẩu:</label>
-            <input type="password" id="password" th:field="*{password}" required>
-        </div>
-        <button type="submit" class="normal"><i class="fas fa-arrow-right"></i> Đăng Nhập</button>
-    </form>
-    <p th:style="'color: ' + ${messageColor}" th:text="${message}"></p>
-    <p>Chưa có tài khoản? <a th:href="@{/register}">Đăng ký ngay</a></p>
-</div>
+    </div>
+</section>
+<footer class="section-p1">
+    <p>&copy; 2025 TechTopStore. All Rights Reserved</p>
+</footer>
 </body>
 </html>
