@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore - Product Details</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+
+<section id="prodetails" class="section-p1">
+    <div class="single-pro-image">
+        <img th:src="@{${product.thumbnail}}" width="100%" id="MainImg" alt="Product Image">
+    </div>
+    <div class="single-pro-details">
+        <h6>Category / <span th:text="${product.category.name}">Category</span></h6>
+        <h4 th:text="${product.name}">Product Name</h4>
+        <h2 th:text="${product.price} + ' USD'">0 USD</h2>
+
+        <!-- Form để chọn số lượng và thêm vào giỏ hàng -->
+        <form th:action="@{/cart/add/{id}(id=${product.id})}" method="post">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" value="1" min="1" step="1">
+            <button type="submit" class="normal">Add To Cart</button>
+        </form>
+
+        <h4>Product Details</h4>
+        <p th:text="${product.description}">Product Description</p>
+    </div>
+</section>
+
+<section id="newsletter" class="section-p1 section-m1">
+    <div class="newstext">
+        <h4>Sign Up for Newsletters</h4>
+        <P>Get E-mail updates about our latest shop and <span>special offers.</span></P>
+    </div>
+    <div class="form">
+        <input type="text" placeholder="Your email address">
+        <button class="normal">Sign Up</button>
+    </div>
+</section>
+
+<div th:replace="inc :: footer"></div>
+
+</body>
+</html>

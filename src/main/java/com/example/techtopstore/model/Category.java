@@ -1,5 +1,6 @@
 package com.example.techtopstore.model;
 
+import com.example.techtopstore.util.SlugUtil;
 import jakarta.persistence.*;
 
 @Entity
@@ -23,7 +24,7 @@ public class Category {
         this.name = name;
         this.thumbnail = thumbnail;
     }
-
+    public String getSlug() { return SlugUtil.toSlug(name); }
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
     public String getName() { return name; }

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - TechTopStore</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<section id="header">
+    <a th:href="@{/}"><img class="logo" th:src="@{/img/logo.png}" alt="Logo"></a>
+    <div>
+        <ul id="navbar">
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/shop}">Products</a></li>
+            <li><a th:href="@{/about}">About</a></li>
+            <li><a th:href="@{/contact}">Contact</a></li>
+            <li id="lg-bag">
+                <a th:href="@{/cart}"><i class="far fa-shopping-bag"></i></a>
+                <span id="total">0</span>
+            </li>
+            <li><a th:href="@{/login}">Login</a></li>
+        </ul>
+    </div>
+</section>
+
+<section id="checkout" class="section-p1">
+    <h2>Checkout</h2>
+    <div class="checkout-container">
+        <div class="billing-details">
+            <h3>Billing Details</h3>
+            <form>
+                <label>Full Name</label>
+                <input type="text" placeholder="John Doe">
+                <label>Email</label>
+                <input type="email" placeholder="johndoe@example.com">
+                <label>Address</label>
+                <input type="text" placeholder="123 Street, City, Country">
+                <label>Phone</label>
+                <input type="text" placeholder="+123456789">
+            </form>
+        </div>
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div th:each="item : ${cartItems}" class="order-item">
+                <p th:text="${item.name}"></p>
+                <p th:text="${item.price} + ' VND'"></p>
+            </div>
+            <h4>Total: <span th:text="${cartTotal} + ' VND'"></span></h4>
+            <button class="normal">Place Order</button>
+        </div>
+    </div>
+</section>
+
+<footer class="section-p1">
+    <div class="col">
+        <img class="logo" th:src="@{/img/logo.png}" alt="Logo">
+        <h4>Contact</h4>
+        <p><strong>Address: </strong> 562 Wellington Road, Street 32, San Francisco</p>
+        <p><strong>Phone: </strong> +01 2222 365 / (+91) 01 2345 6789</p>
+        <p><strong>Hours: </strong> 10:00 - 18:00, Mon - Sat</p>
+        <div class="follow">
+            <h4>Follow us</h4>
+            <div class="icon">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-pinterest"></i>
+                <i class="fab fa-youtube"></i>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -8,18 +8,8 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-<section id="header">
-    <a href="#"><img class="logo" src="./img/logo.png" alt=""></a>
-    <div>
-        <ul id="navbar">
-            <li><a href="/">Home</a></li>
-            <li><a href="shop">Products</a></li>
-            <li><a href="about">About</a></li>
-            <li><a href="contact">Contact</a></li>
-            <li><a href="login" class="active">Login</a></li>
-        </ul>
-    </div>
-</section>
+<div th:replace="inc :: header"></div>
+
 <section class="form-container">
     <div class="form-box">
         <h2>Đăng Nhập</h2>
@@ -39,8 +29,7 @@
         </div>
     </div>
 </section>
-<footer class="section-p1">
-    <p>&copy; 2025 TechTopStore. All Rights Reserved</p>
-</footer>
+
+<div th:replace="inc :: footer"></div>
 </body>
 </html>

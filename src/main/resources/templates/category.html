@@ -12,9 +12,8 @@
     <!-- CSS -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body onload="indexLoadPage()">
 <div th:replace="inc :: header"></div>
-
 <section id="page-header">
     <h2>#Stayhome</h2>
     <p>Save more with coupons & up to 70% off!</p>
@@ -25,7 +24,7 @@
     <p>Explore our latest collection</p>
 
     <div class="pro-container">
-        <div class="pro" th:each="product : ${products}">
+        <div class="pro" th:each="product : ${productList}">
             <a th:href="@{/product/{id}(id=${product.id})}">
                 <img th:src="@{${product.thumbnail}}" alt="Product Image">
             </a>
@@ -59,6 +58,5 @@
 </section>
 
 <div th:replace="inc :: footer"></div>
-
 </body>
 </html>
