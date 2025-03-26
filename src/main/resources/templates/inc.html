@@ -23,8 +23,6 @@
                     <li th:each="category : ${categoryList}" class="menu-item">
                         <a class="menu-link" th:text="${category.name}" th:href="@{/category/{slug}-{id}.html(slug=${category.getSlug()}, id= ${category.id})}"></a>
                     </li>
-                    <li class="menu-item"><a class="menu-link" th:href="@{/shop}">Laptop</a></li>
-                    <li class="menu-item"><a class="menu-link" th:href="@{/shop}">Accessories</a></li>
                 </ul>
             </li>
             <li><a th:href="@{/shop}">Products</a></li>

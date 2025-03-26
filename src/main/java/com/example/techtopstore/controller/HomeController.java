@@ -24,12 +24,15 @@ public class HomeController {
     @Autowired
     private CategoryService categoryService;
 
+    @ModelAttribute("categoryList")
+    public List<Category> getCategoryList() {
+        return categoryService.getAllCateories();
+    }
+
     @GetMapping
     public String home(Model model) {
-        List<Product> allProducts = productService.getAllProducts();
-        List<Product> featuredProducts = allProducts.size() > 8 ? allProducts.subList(0, 8) : allProducts;
+        List<Product> featuredProducts = productService.getTopProducts(8); // Lấy 8 sản phẩm từ database
 
-        loadCategoryList(model);
         model.addAttribute("featuredProducts", featuredProducts);
         return "index";
     }

@@ -41,4 +41,8 @@ public class OrderService {
             orderRepository.deleteById(id);
         }
     }
+
+    public Order getOrderByStatus(int userId, String status){
+        return orderRepository.findByUserAndStatus(userId, status);
+    }
 }

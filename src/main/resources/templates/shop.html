@@ -32,7 +32,7 @@
             <div class="des">
                 <span th:text="${product.category.name}">Category</span>
                 <h5 th:text="${product.name}">Product Name</h5>
-                <h4 th:text="${product.price} + ' VND'">0 VND</h4>
+                <h4 th:text="${product.price} + ' USD'">0 USD</h4>
             </div>
             <a th:href="@{/cart/add/{id}(id=${product.id})}">
                 <i class="fas fa-shopping-cart cart"></i>

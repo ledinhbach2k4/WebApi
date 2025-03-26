@@ -41,4 +41,8 @@ public class OrderItemService {
             orderItemRepository.deleteById(id);
         }
     }
+
+    public OrderItem createOrderItem(OrderItem orderItem){
+        return orderItemRepository.save(orderItem);
+    }
 }

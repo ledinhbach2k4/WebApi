@@ -1,7 +1,9 @@
 package com.example.techtopstore.controller.api;
 
 import com.example.techtopstore.model.Order;
+import com.example.techtopstore.model.User;
 import com.example.techtopstore.service.OrderService;
+import com.example.techtopstore.util.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +61,23 @@ public class ApiOrderController {
     public ResponseEntity<Void> deleteOrder(@PathVariable("id") int id){
         categoryService.deleteOrder(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/get-by-status")
+    public ResponseEntity<Order> getOrderById(@RequestParam("userId") int userId, @RequestParam("status") String status){
+        Order order = categoryService.getOrderByStatus(userId, status);
+        if(order == null){
+            //Tao moi order
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            User user = new User();
+            user.setId(1);
+
+            order = new Order();
+            order.setStatus(status);
+            order.setCode(Helper.generateRandomString(8));
+            order.setUser(user);
+            order = categoryService.addOrder(order);
+        }
+        return new ResponseEntity<>(order, HttpStatus.OK);
     }
 }

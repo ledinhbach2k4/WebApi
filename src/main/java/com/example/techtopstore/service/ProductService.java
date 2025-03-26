@@ -1,6 +1,8 @@
 package com.example.techtopstore.service;
 
 import com.example.techtopstore.model.Product;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import com.example.techtopstore.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,5 +49,9 @@ public class ProductService {
         if (existingProduct != null){
             productRepository.deleteById(id);
         }
+    }
+    public List<Product> getTopProducts(int limit) {
+        Pageable pageable = PageRequest.of(0, limit);
+        return productRepository.findTopProducts(pageable);
     }
 }

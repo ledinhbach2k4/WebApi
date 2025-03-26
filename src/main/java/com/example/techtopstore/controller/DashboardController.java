@@ -19,7 +19,7 @@ public class DashboardController {
     public String showDashboard(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("newUser", new User()); // Dùng để bind form thêm user
-        return "dashboard";
+        return "admin/dashboard";
     }
 
     // Thêm user mới
