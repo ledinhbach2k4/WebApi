@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+
+<section id="page-header">
+    <h2>All Products</h2>
+    <p>Explore our latest collection</p>
+</section>
+
+<!-- 🔹 Bộ lọc sản phẩm -->
+<!-- Updated HTML for filter-section -->
+<section id="filter-section" class="section-p1">
+    <form th:action="@{/shop}" method="get" class="filter-form">
+        <div class="filter-group">
+            <div class="filter-item">
+                <label for="category"><i class="fas fa-list"></i> Category</label>
+                <select id="category" name="categoryId" class="filter-select">
+                    <option value="">All Categories</option>
+                    <option th:each="category : ${categoryList}"
+                            th:value="${category.id}"
+                            th:text="${category.name}"></option>
+                </select>
+            </div>
+
+            <div class="filter-item price-range">
+                <label><i class="fas fa-dollar-sign"></i> Price Range</label>
+                <div class="price-inputs">
+                    <input type="number" id="minPrice" name="minPrice" placeholder="Min" min="0">
+                    <span>-</span>
+                    <input type="number" id="maxPrice" name="maxPrice" placeholder="Max" min="0">
+                </div>
+            </div>
+
+            <div class="filter-item">
+                <label for="sort"><i class="fas fa-sort"></i> Sort By</label>
+                <select id="sort" name="sortType" class="filter-select">
+                    <option value="default">Default Sorting</option>
+                    <option value="priceAsc">Price: Low to High</option>
+                    <option value="priceDesc">Price: High to Low</option>
+                    <option value="nameAsc">Name: A to Z</option>
+                    <option value="nameDesc">Name: Z to A</option>
+                    <option value="rating">Top Rated</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-filter"><i class="fas fa-filter"></i> Apply Filters</button>
+        </div>
+    </form>
+</section>
+
+<section id="product1" class="section-p1">
+    <div class="pro-container">
+        <a class="pro" th:each="product : ${filteredProducts}"
+           th:href="@{/products/{slug}-{id}.html(slug=${product.getSlug()},id=${product.id})}">
+            <img th:src="@{${product.thumbnail}}" alt="Product Image">
+            <div class="des">
+                <h5 th:text="${product.name}">Product Name</h5>
+                <h4 th:text="${product.price} + ' USD'">$0</h4>
+            </div>
+            <button type="submit">
+                <i class="fas fa-shopping-cart cart"></i>
+            </button>
+        </a>
+    </div>
+</section>
+
+<section id="pagination" class="section-p1">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#"><i class="fal fa-long-arrow-alt-right"></i></a>
+</section>
+
+<div th:replace="inc :: letter"></div>
+<div th:replace="inc :: footer"></div>
+
+</body>
+</html>

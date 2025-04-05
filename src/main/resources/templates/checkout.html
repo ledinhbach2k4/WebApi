@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - TechTopStore</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+
+<section id="page-header" class="section-p1">
+    <h2>#Checkout</h2>
+    <p>Complete your order details below.</p>
+</section>
+
+<section id="checkout" class="section-p1">
+    <div class="checkout-container">
+        <div class="billing-details">
+            <h3>Billing Details</h3>
+            <form th:action="@{/checkout}" method="post" class="checkout-form">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" name="fullName" placeholder="Your Name" required>
+                <label>Email <span class="required">*</span></label>
+                <input type="email" name="email" placeholder="username@example.com" required>
+                <label>Address <span class="required">*</span></label>
+                <input type="text" name="address" placeholder="123 Street, City, Country" required>
+                <label>Phone <span class="required">*</span></label>
+                <input type="text" name="phone" placeholder="+123456789" required>
+
+                <label>Payment Method <span class="required">*</span></label>
+                <div class="payment-methods">
+                    <div class="payment-option">
+                        <input type="radio" id="creditCard" name="paymentMethod" value="creditCard" required>
+                        <label for="creditCard"><i class="fas fa-credit-card"></i> Credit Card</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="paypal" name="paymentMethod" value="paypal">
+                        <label for="paypal"><i class="fab fa-paypal"></i> PayPal</label>
+                    </div>
+                    <div class="payment-option">
+                        <input type="radio" id="cod" name="paymentMethod" value="cod">
+                        <label for="cod"><i class="fas fa-money-bill"></i> Cash on Delivery</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn normal place-order-btn"><i class="fas fa-check"></i> Place Order</button>
+            </form>
+        </div>
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="order-items">
+                <div th:each="item : ${cartItems}" class="order-item">
+                    <p th:text="${item.name}"></p>
+                    <p th:text="${item.quantity} + ' x ' + ${item.price} + ' USD'"></p>
+                </div>
+            </div>
+            <h4>Total: <span th:text="${cartTotal} + ' USD'"></span></h4>
+        </div>
+    </div>
+</section>
+
+<div th:replace="inc :: footer"></div>
+</body>
+</html>

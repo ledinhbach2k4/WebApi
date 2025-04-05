@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="section-p1 dashboard-container">
+    <h2><i class="fas fa-tachometer-alt"></i> Dashboard Quản Lý Users</h2>
+
+    <!-- Thông báo -->
+    <p class="message" th:style="'color: ' + ${messageColor}" th:text="${message}"></p>
+
+    <!-- Danh sách users -->
+    <h3>Danh sách Users</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td>
+                <a th:href="@{/dashboard/edit/{id}(id=${user.id})}"><i class="fas fa-edit"></i> Sửa</a>
+                <a th:href="@{/dashboard/delete/{id}(id=${user.id})}"
+                   onclick="return confirm('Bạn có chắc chắn muốn xóa user này?')">
+                    <i class="fas fa-trash"></i> Xóa
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Form thêm user -->
+    <h3>Thêm User Mới</h3>
+    <form th:action="@{/dashboard/add}" th:object="${newUser}" method="post" class="form">
+        <div class="form-group">
+            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+            <input type="email" id="email" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password"><i class="fas fa-lock"></i> Mật khẩu:</label>
+            <input type="password" id="password" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <label for="role"><i class="fas fa-user-tag"></i> Role:</label>
+            <input type="text" id="role" th:field="*{role}" required>
+        </div>
+        <button type="submit" class="normal"><i class="fas fa-plus"></i> Thêm</button>
+    </form>
+
+    <!-- Form chỉnh sửa user (hiển thị khi nhấn nút Sửa) -->
+    <div th:if="${userToEdit != null}">
+        <h3>Chỉnh Sửa User</h3>
+        <form th:action="@{/dashboard/update/{id}(id=${userToEdit.id})}"
+              th:object="${userToEdit}" method="post" class="form">
+            <div class="form-group">
+                <label for="editEmail"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" id="editEmail" th:field="*{email}" required>
+            </div>
+            <div class="form-group">
+                <label for="editPassword"><i class="fas fa-lock"></i> Mật khẩu:</label>
+                <input type="password" id="editPassword" th:field="*{password}" required>
+            </div>
+            <div class="form-group">
+                <label for="editRole"><i class="fas fa-user-tag"></i> Role:</label>
+                <input type="text" id="editRole" th:field="*{role}" required>
+            </div>
+            <button type="submit" class="normal"><i class="fas fa-save"></i> Lưu</button>
+        </form>
+    </div>
+
+    <p><a th:href="@{/login}">Quay lại Đăng Nhập</a></p>
+</div>
+</body>
+</html>

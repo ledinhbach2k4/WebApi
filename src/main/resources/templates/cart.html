@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore - Cart</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+
+<section id="page-header" class="section-p1">
+    <h2>#Shopping Cart</h2>
+    <p>Review your selected items before checkout.</p>
+</section>
+
+<section id="cart" class="section-p1">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 my-5">
+                <table class="table align-middle">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${cartItems}">
+                        <td th:text="${item.name}">Product Name</td>
+                        <td>
+                            <div class="cart-img-container">
+                                <img th:src="@{${item.thumbnail}}" alt="Product Image" class="cart-product-img">
+                            </div>
+                        </td>
+                        <td th:text="${item.price} + ' USD'">0 USD</td>
+                        <td>
+                            <form th:action="@{/cart/update/{id}(id=${item.id})}" method="post" class="quantity-form">
+                                <input type="number" name="quantity" th:value="${item.quantity}" min="1" class="quantity-input">
+                                <button type="submit" class="btn-update"><i class="fas fa-sync-alt"></i> Update</button>
+                            </form>
+                        </td>
+                        <td th:text="${item.price * item.quantity} + ' USD'">0 USD</td>
+                        <td>
+                            <a th:href="@{/cart/remove/{id}(id=${item.id})}" class="delete-btn">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 cart-footer">
+                <h4>TOTAL: <span th:text="${totalPrice} + ' USD'">0 USD</span></h4>
+                <a th:href="@{/checkout}" class="btn normal checkout-btn"><i class="fas fa-arrow-right"></i> Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="inc :: footer"></div>
+</body>
+</html>

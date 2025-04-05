@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body onload="indexLoadPage()">
+<div th:replace="inc :: header"></div>
+<section id="page-header">
+    <h2>#Stayhome</h2>
+    <p>Save more with coupons & up to 70% off!</p>
+</section>
+
+<section id="product1" class="section-p1">
+    <h2>All Products</h2>
+    <p>Explore our latest collection</p>
+
+    <div class="pro-container">
+        <div class="pro" th:each="product : ${productList}">
+            <a th:href="@{/products/{slug}-{id}.html(slug=${product.getSlug()},id=${product.id})}">
+                <img th:src="@{${product.thumbnail}}" alt="Product Image">
+            </a>
+            <div class="des">
+                <span th:text="${product.category.name}">Category</span>
+                <h5 th:text="${product.name}">Product Name</h5>
+                <h4 th:text="${product.price} + ' USD'">0 USD</h4>
+            </div>
+            <a th:href="@{/cart/add/{id}(id=${product.id})}">
+                <i class="fas fa-shopping-cart cart"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="pagination" class="section-p1">
+    <a href="#">1</a>
+    <a href="#">2</a>
+    <a href="#"><i class="fal fa-long-arrow-alt-right"></i></a>
+</section>
+
+<div th:replace="inc :: letter"></div>
+
+<div th:replace="inc :: footer"></div>
+</body>
+</html>

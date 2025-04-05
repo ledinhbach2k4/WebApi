@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+<section id="hero">
+    <img th:src="@{/video/banner-tokyo.gif}" alt="Banner GIF" class="hero-video">
+    <div class="hero-content">
+        <h4>Trade-in Offer</h4>
+        <h2>Super Value Deals</h2>
+        <h1>On All PC Products</h1>
+        <p>Save more with coupons & up to 70% off!</p>
+        <form th:action="@{/shop}" method="get">
+            <button type="submit">Shop Now</button>
+        </form>
+    </div>
+</section>
+
+<section id="feature" class="section-p1">
+    <div class="fe-box" th:each="feature : ${features}">
+        <img th:src="@{${feature.image}}" alt="">
+        <h6 th:text="${feature.description}"></h6>
+    </div>
+</section>
+
+<section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Latest High-Performance PC</p>
+    <div class="pro-container">
+        <a class="pro" th:each="product : ${featuredProducts}" th:href="@{/products/{slug}-{id}.html(slug=${product.getSlug()},id=${product.id})}">
+            <img th:src="@{${product.thumbnail}}" alt="Product Image">
+            <div class="des">
+                <span th:text="${product.category.name}">Category</span>
+                <h5 th:text="${product.name}">Product Name</h5>
+                <h4 th:text="${product.price} + ' USD'">$0</h4>
+            </div>
+            <button type="submit">
+                <i class="fas fa-shopping-cart cart"></i>
+            </button>
+        </a>
+    </div>
+</section>
+
+<section id="banner" class="section-m1">
+    <h4>Computer Component Deals</h4>
+    <h2>Up to <span>70% Off</span> - All Components & Accessories</h2>
+    <form th:action="@{/shop}" method="get">
+        <button type="submit" class="normal">Explore More</button>
+    </form>
+</section>
+
+<section id="product1" class="section-p1">
+    <h2>Featured Products</h2>
+    <p>Latest High-Performance PC</p>
+    <div class="pro-container">
+        <a class="pro" th:each="product : ${featuredProducts}" th:href="@{/products/{slug}-{id}.html(slug=${product.getSlug()},id=${product.id})}">
+            <img th:src="@{${product.thumbnail}}" alt="Product Image">
+            <div class="des">
+                <h5 th:text="${product.name}">Product Name</h5>
+                <h4 th:text="${product.price} + ' USD'">$0</h4>
+            </div>
+            <button type="submit">
+                <i class="fas fa-shopping-cart cart"></i>
+            </button>
+        </a>
+    </div>
+</section>
+
+<div th:replace="inc :: letter"></div>
+
+<div th:replace="inc :: footer"></div>
+
+</body>
+</html>

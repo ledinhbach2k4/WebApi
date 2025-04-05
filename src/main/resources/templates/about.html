@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechTopStore</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+<div th:replace="inc :: header"></div>
+
+    <section id="about" class="section-p1">
+        <h2>#About TechTopStore</h2>
+        <div>
+            <img class="" src="./img/about/a6.jpg" alt="">
+            <span>
+                <h4>About TechTopStore</h4>
+                <p>Welcome to <strong>TechTopStore</strong>, your number one source for all things tech. We're dedicated to providing you the very best of technology products, with an emphasis on <strong>quality, customer service, and uniqueness</strong>.</p>
+                <p>Founded in <strong>2024</strong> by <strong>Le Dinh Bach</strong>, TechTopStore has come a long way from its beginnings in <strong>VietNam</strong>. When Bach first started out, his passion for <strong>eco-friendly tech products</strong> drove him to start his own business.</p>
+                <p>We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don't hesitate to contact us.</p>
+                <p>Sincerely, <br> <strong>Le Dinh Bach</strong></p>
+
+                <marquee bgcolor="#ccc" loop="-1" scrollamount="5" width="100%">Welcome to TechTopStore! Enjoy our latest tech products and services. Contact us for more information!</marquee>
+            </span>            
+        </div>
+    </section>
+
+    <section id="team" class="section-p1">
+        <h2>Our Team</h2>
+        <div class="team-container">
+            <div class="team-member">
+                <img src="./img/people/1.png" alt="">
+                <h4>Le Dinh Bach</h4>
+                <p>Founder & CEO</p>
+            </div>
+            <div class="team-member">
+                <img src="./img/people/1.png" alt="">
+                <h4>Le Dinh Bach</h4>
+                <p>COO</p>
+            </div>
+            <div class="team-member">
+                <img src="./img/people/1.png" alt="">
+                <h4>Le Dinh Bach</h4>
+                <p>CTO</p>
+            </div>
+            <div class="team-member">
+                <img src="./img/people/1.png" alt="">
+                <h4>Le Dinh Bach</h4>
+                <p>Marketing Head</p>
+            </div>
+        </div>
+    </section>
+
+<div th:replace="inc :: letter"></div>
+
+<div th:replace="inc :: footer"></div>
+</body>
+</html>
